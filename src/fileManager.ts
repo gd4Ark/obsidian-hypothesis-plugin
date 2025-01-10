@@ -81,7 +81,7 @@ export default class FileManager {
         return { file, frontmatter: cache?.frontmatter };
       })
       .filter(({ frontmatter }) => frontmatter?.["doc_type"] === frontMatterDocType)
-      .map(({ file, frontmatter }): AnnotationFile => ({ file, articleUrl: frontmatter["url"] }))
+      .map(({ file, frontmatter }): AnnotationFile => ({ file, articleUrl: frontmatter["source"] }))
   }
 
   public async getNewArticleFilePath(article: Article): Promise<string> {

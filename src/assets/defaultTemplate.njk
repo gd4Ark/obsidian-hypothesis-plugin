@@ -1,32 +1,18 @@
-{% if is_new_article %}
-# {{title}}
-## Metadata
-{% if author %}- Author: [{{author}}]({{authorUrl}}){% endif %}
-- Title: {{title}}
-{% if url %}- Reference: {{url}}{% endif %}
-- Category: #article
-{% endif %}
-
 {% if page_notes.length > 0 %}
-## Page Notes
-{% for highlight in page_notes -%}
-{{highlight.annotation}}
-{%- if highlight.tags | length %}
-Tags: {% for tag in highlight.tags -%} #{{tag | replace(" ", "-")+" "}}{%- endfor %}
-{% endif %}
-{% endfor %}
-{% endif %}
-
-{% if is_new_article %}
-## Highlights
-{% endif %}
+{% for note in page_notes -%}
+>[!tip] Page Notes
+>> {{note.annotation}}
+{%- if note.tags | length %}
+{% for tag in note.tags -%} #{{tag | replace(" ", "-")+" "}}{%- endfor %}
+{% endif %} {% endfor %} {% endif %} 
 {% for highlight in highlights -%}
-- {{highlight.text}} — [Updated on {{highlight.updated}}]({{highlight.incontext}})
-{%- if 'Private' != highlight.group %} 
-- Group: #{{highlight.group | replace(" ", "-")}}{% endif %}
-{% if highlight.tags | length %}    - Tags: {% for tag in highlight.tags %} #{{tag | replace(" ", "-")+" "}}{% endfor %}
-{% endif -%}
-{% if highlight.annotation %}    - Annotation:
-      {{highlight.annotation}}
+>[!note] [Updated on {{highlight.updated}}]({{highlight.incontext}})
+>> {{highlight.text}}
+> 
+{% if highlight.annotation %}>
+`far:Edit` {{highlight.annotation}}
 {% endif %}
+{%- if highlight.tags | length %}
+
+{% for tag in highlight.tags -%} #{{tag | replace(" ", "-")+" "}}{%- endfor %} {% endif %} 
 {% endfor %}
